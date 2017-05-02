@@ -4,6 +4,9 @@ var app = express();
 
 var handlebars = require('express3-handlebars').create({defaultLayout:'main'});
 
+var fortune = require('./lib/fortune.js');
+
+
 app.engine('handlebars',handlebars.engine);
 app.set('view engine', 'handlebars');
 
@@ -21,7 +24,7 @@ app.get('/about', function(req,res){
 //	res.type('text/plain');
 //	res.send('About Meadowlark Travel');
 	var randomFortune = fortunes[Math.floor(Math.random()* fortunes.length)];
-	res.render('about',{fortune: randomFortune});
+	res.render('about',{fortune: fortune.getFortune()});
 });
 
 
@@ -51,9 +54,5 @@ var fortunes = [
     "You will have a pleasant surprise.",
     "Whenever possible, keep it simple.",
 ];
-
-
-
-
 
 
